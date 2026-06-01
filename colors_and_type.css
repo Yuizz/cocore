@@ -1,0 +1,132 @@
+/* ============================================================
+   COCORE ATELIER — Colors & Type
+   Estudio cerámico de alta temperatura · Monterrey
+   Source of truth: README.md + uploads/cocore.md
+   Fonts: Playfair Display (display, Google Fonts) + Space Grotesk (body/UI, self-hosted)
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+/* Brand-uploaded body/UI face — self-hosted variable font (300–700). */
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('fonts/SpaceGrotesk-VariableFont_wght.ttf') format('truetype-variations'),
+       url('fonts/SpaceGrotesk-VariableFont_wght.ttf') format('truetype');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ---------- BRAND & ACCENT ---------- */
+  --terracota:        #b5583a;  /* Primary — color firma de la marca */
+  --terracota-active: #8f3f25;  /* Hover / press del primary */
+  --terracota-soft:   #e8c4b4;  /* Disabled / chip outline pastel */
+  --sage:             #7a9e8e;  /* Acento metadatos: badges, materiales */
+  --humo:             #a09585;  /* Gris cálido decorativo, separadores */
+
+  /* ---------- SURFACE & BACKGROUND ---------- */
+  --canvas:           #faf6f0;  /* Adobe — piso de página dominante */
+  --surface-hueso:    #f2ebe0;  /* Tarjetas de producto, feature blocks */
+  --surface-barro:    #e8ddd0;  /* Mayor énfasis: about, testimonial */
+  --surface-dark:     #1e1a17;  /* Bandas oscuras, footer, nav scroll */
+  --surface-dark-elev:#2b2520;  /* Tarjetas elevadas en banda oscura */
+  --hairline:         #ddd5c8;  /* Borde 1px sobre canvas y cards */
+  --hairline-soft:    #ece6dc;  /* Divisor interno misma banda */
+
+  /* ---------- TEXT ---------- */
+  --ink:              #1a1510;  /* Titulares y texto primario */
+  --body-strong:      #302620;  /* Párrafos con énfasis, precio */
+  --body:             #4a3d35;  /* Cuerpo de texto estándar */
+  --muted:            #7a6d65;  /* Fechas, metadata, etiquetas */
+  --muted-soft:       #a09585;  /* Fine print, copyright, microcopy */
+  --on-primary:       #ffffff;  /* Texto sobre botones terracota */
+  --on-dark:          #faf6f0;  /* Texto sobre bandas oscuras */
+  --on-dark-soft:     #b0a89e;  /* Cuerpo secundario en oscuro */
+
+  /* ---------- SEMANTIC ---------- */
+  --success:          #5a8f72;  /* Confirmación, "en stock" */
+  --warning:          #c47c28;  /* "Últimas piezas", stock bajo */
+  --error:            #b33030;  /* Errores de formulario */
+
+  /* ---------- TYPE FAMILIES ---------- */
+  --font-display: 'Playfair Display', 'Cormorant Garamond', 'EB Garamond', Georgia, serif;
+  --font-body:    'Space Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* ---------- SPACING (base 8) ---------- */
+  --space-1: 4px;   --space-2: 8px;   --space-3: 12px;  --space-4: 16px;
+  --space-5: 20px;  --space-6: 24px;  --space-8: 32px;  --space-10: 40px;
+  --space-12: 48px; --space-16: 64px; --space-20: 80px; --space-24: 96px;
+  --space-30: 120px;
+
+  /* ---------- RADIUS ---------- */
+  --radius-xs: 4px;    /* badges, chips, inputs */
+  --radius-sm: 8px;    /* botones, thumbnails secundarios */
+  --radius-md: 12px;   /* tarjetas de producto estándar */
+  --radius-lg: 20px;   /* hero de colección, modales */
+  --radius-xl: 28px;   /* placeholder de imagen en hero */
+  --radius-pill: 9999px;
+
+  /* ---------- ELEVATION ---------- */
+  /* Sistema mayormente plano. Profundidad por contraste + bordes. */
+  --shadow-card: 0 2px 12px rgba(26,21,16,0.07); /* hover / modal de detalle */
+
+  /* ---------- LAYOUT ---------- */
+  --container-max: 1200px;
+}
+
+/* ============================================================
+   SEMANTIC TYPE STYLES
+   Display serif siempre en 400 con tracking negativo.
+   Inter nunca supera 500 fuera de titles/labels.
+   ============================================================ */
+
+.t-hero {            /* Hero Display */
+  font-family: var(--font-display); font-weight: 400;
+  font-size: 80px; line-height: 1.05; letter-spacing: -1.6px; color: var(--ink);
+}
+.t-section {         /* Section Display */
+  font-family: var(--font-display); font-weight: 400;
+  font-size: 56px; line-height: 1.10; letter-spacing: -1.0px; color: var(--ink);
+}
+.t-heading-lg {      /* Heading LG */
+  font-family: var(--font-display); font-weight: 400;
+  font-size: 40px; line-height: 1.15; letter-spacing: -0.6px; color: var(--ink);
+}
+.t-heading-md {      /* Heading MD — precio prominente, card heading */
+  font-family: var(--font-display); font-weight: 400;
+  font-size: 28px; line-height: 1.20; letter-spacing: -0.3px; color: var(--ink);
+}
+.t-title-lg {        /* Title LG — nombre de producto */
+  font-family: var(--font-body); font-weight: 500;
+  font-size: 20px; line-height: 1.30; color: var(--ink);
+}
+.t-title-md {        /* Title MD — labels de formulario, nav activo */
+  font-family: var(--font-body); font-weight: 500;
+  font-size: 16px; line-height: 1.40; color: var(--ink);
+}
+.t-body-lg {         /* Body LG — párrafo lead */
+  font-family: var(--font-body); font-weight: 400;
+  font-size: 18px; line-height: 1.55; color: var(--body);
+}
+.t-body {            /* Body MD — cuerpo estándar */
+  font-family: var(--font-body); font-weight: 400;
+  font-size: 16px; line-height: 1.55; color: var(--body);
+}
+.t-body-sm {         /* Body SM — pie de imagen */
+  font-family: var(--font-body); font-weight: 400;
+  font-size: 14px; line-height: 1.55; color: var(--muted);
+}
+.t-button {          /* Button label */
+  font-family: var(--font-body); font-weight: 500;
+  font-size: 14px; line-height: 1.0; letter-spacing: 0.2px;
+}
+.t-caption {         /* Caption Uppercase — categorías, badges */
+  font-family: var(--font-body); font-weight: 600;
+  font-size: 11px; line-height: 1.4; letter-spacing: 1.8px;
+  text-transform: uppercase;
+}
+.t-micro {           /* Micro — footer, legal */
+  font-family: var(--font-body); font-weight: 400;
+  font-size: 12px; line-height: 1.4; color: var(--muted-soft);
+}

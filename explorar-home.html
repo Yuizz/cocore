@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cocore — Variaciones del Home</title>
+<link rel="stylesheet" href="colors_and_type.css">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; background: #e9e4dc; color: var(--ink); font-family: var(--font-body); }
+  .wrap { max-width: 1320px; margin: 0 auto; padding: 56px 40px 80px; }
+  .head { margin-bottom: 44px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 32px; align-items: start; }
+  .card { background: var(--canvas); border: 1px solid var(--hairline); border-radius: var(--radius-lg); overflow: hidden; box-shadow: 0 1px 3px rgba(26,21,16,.05); }
+  .card-h { padding: 22px 24px 18px; }
+  .badge { display:inline-block; font-size:11px; font-weight:600; letter-spacing:1.8px; text-transform:uppercase; color: var(--terracota); margin-bottom: 8px; }
+  .card-h h2 { font-family: var(--font-display); font-weight: 400; font-size: 26px; letter-spacing: -.4px; margin: 0 0 8px; }
+  .card-h p { font-size: 14px; line-height: 1.5; color: var(--body); margin: 0; }
+  .frame { position: relative; overflow: hidden; border-top: 1px solid var(--hairline); background: var(--canvas); }
+  .frame img { width: 100%; display:block; }
+  .card-f { display:flex; gap:10px; padding: 18px 24px; border-top: 1px solid var(--hairline); }
+  a.btn { display:inline-flex; align-items:center; gap:7px; text-decoration:none; font-size:14px; font-weight:500; border-radius: var(--radius-pill); padding: 11px 22px; cursor:pointer; transition: background .18s; }
+  a.primary { background: var(--terracota); color:#fff; }
+  a.primary:hover { background: var(--terracota-active); }
+  a.ghost { background: transparent; color: var(--ink); border:1px solid var(--hairline); }
+  a.ghost:hover { border-color: var(--ink); }
+  .tag { font-size:12px; color: var(--muted); }
+  .head h1 { font-family: var(--font-display); font-weight: 400; font-size: 46px; letter-spacing: -1px; margin: 0 0 12px; }
+  .head p { font-size: 17px; line-height: 1.55; color: var(--body); max-width: 640px; margin: 0; }
+  .dims { display:flex; gap:18px; flex-wrap:wrap; margin-top: 14px; }
+  .dims span { font-size:13px; color: var(--muted); display:flex; align-items:center; gap:6px; }
+  .dims b { color: var(--terracota); font-weight:600; }
+</style>
+</head>
+<body>
+<template id="__bundler_thumbnail" data-bg-color="#e9e4dc">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#e9e4dc"/>
+    <rect x="170" y="230" width="260" height="340" rx="20" fill="#faf6f0" stroke="#ddd5c8" stroke-width="3"/>
+    <rect x="470" y="230" width="260" height="340" rx="20" fill="#faf6f0" stroke="#ddd5c8" stroke-width="3"/>
+    <rect x="770" y="230" width="260" height="340" rx="20" fill="#faf6f0" stroke="#ddd5c8" stroke-width="3"/>
+    <rect x="200" y="270" width="120" height="14" rx="7" fill="#b5583a"/>
+    <rect x="200" y="300" width="180" height="22" rx="6" fill="#1a1510"/>
+    <rect x="200" y="370" width="200" height="160" rx="12" fill="#e6dccd"/>
+    <rect x="500" y="370" width="200" height="160" rx="12" fill="#e6dccd"/>
+    <rect x="800" y="370" width="200" height="160" rx="12" fill="#e6dccd"/>
+    <circle cx="600" cy="150" r="40" fill="#b5583a"/>
+  </svg>
+</template>
+<div class="wrap">
+  <div class="head">
+    <div class="badge" style="color: var(--terracota)">Exploración · Home</div>
+    <h1>Tres direcciones para el home</h1>
+    <p>Mismo sistema visual de Cocore, tres maneras de abrir la tienda. Comparten Nav, catálogo y carrito — cambian el layout, el uso del color y el ritmo. Abre cualquiera para navegarla completa; todas enlazan al mismo ecommerce.</p>
+    <div class="dims">
+      <span><b>A</b> Layout editorial</span>
+      <span><b>B</b> Color &amp; contraste</span>
+      <span><b>C</b> Catálogo-first</span>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <div class="card-h">
+        <div class="badge">Home A · Recomendada</div>
+        <h2>Editorial Galería</h2>
+        <p>Fiel al sistema: ritmo de superficies canvas → hueso → barro → terracota y terracota racionada. Ahora incluye la <b style="color:var(--terracota);font-weight:600">Colección Humo</b> como banda oscura destacada. La dirección recomendada.</p>
+      </div>
+      <a class="frame" href="index.html" style="display:block"><img src="screenshots/home-a.png" alt="Home A"></a>
+      <div class="card-f">
+        <a class="btn primary" href="index.html">Abrir Home A</a>
+        <span class="tag" style="align-self:center">index.html</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-h">
+        <div class="badge">Home B</div>
+        <h2>Color &amp; Contraste</h2>
+        <p>Hero claro y editorial; el fondo oscuro se reserva para la banda destacada (Colección Humo). Misma presencia, mejor integrado al resto del diseño.</p>
+      </div>
+      <a class="frame" href="home-b.html" style="display:block"><img src="screenshots/home-b.png" alt="Home B"></a>
+      <div class="card-f">
+        <a class="btn primary" href="home-b.html">Abrir Home B</a>
+        <span class="tag" style="align-self:center">home-b.html</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-h">
+        <div class="badge">Home C</div>
+        <h2>Catálogo-first · Minimal</h2>
+        <p>Tipográfica y directa: el grid de producto aparece de inmediato con pestañas por categoría. Mucho aire, casi sin terracota.</p>
+      </div>
+      <a class="frame" href="home-c.html" style="display:block"><img src="screenshots/home-c.png" alt="Home C"></a>
+      <div class="card-f">
+        <a class="btn primary" href="home-c.html">Abrir Home C</a>
+        <span class="tag" style="align-self:center">home-c.html</span>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
