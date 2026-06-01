@@ -24,6 +24,30 @@ const ORDERS = {
 };
 
 function Timeline({ state }) {
+  const { isMobile } = useViewport();
+  if (isMobile) {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 0, margin: '4px 0' }}>
+        {STATES.map((s, i) => {
+          const done = i <= state;
+          const isLast = i === STATES.length - 1;
+          return (
+            <div key={s} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <div style={{ width: 24, height: 24, borderRadius: '50%', flex: 'none',
+                  background: done ? 'var(--terracota)' : 'var(--surface-hueso)',
+                  border: '1px solid ' + (done ? 'var(--terracota)' : 'var(--hairline)'),
+                  display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  {done && <Icon name="check" size={13} stroke="#fff" strokeWidth={2.5} />}
+                </div>
+                {!isLast && <div style={{ width: 2, height: 22, background: i < state ? 'var(--terracota)' : 'var(--hairline)' }} />}
+              </div>
+              <span className="t-body-sm" style={{ color: done ? 'var(--ink)' : 'var(--muted)', paddingTop: 2,
+                paddingBottom: isLast ? 0 : 18, fontWeight: i === state ? 500 : 400 }}>{s}</span>
+            </div>);
+        })}
+      </div>);
+  }
   return (
     <div style={{ display: 'flex', alignItems: 'flex-start', gap: 0, margin: '8px 0 4px' }}>
       {STATES.map((s, i) => {
@@ -50,6 +74,7 @@ function Timeline({ state }) {
 }
 
 function OrderCard({ id, order }) {
+  const { isMobile } = useViewport();
   const total = order.items.reduce((s, i) => s + i.price * i.qty, 0);
   return (
     <div style={{ border: '1px solid var(--hairline)', borderRadius: 'var(--radius-lg)', overflow: 'hidden', background: 'var(--canvas)' }}>
@@ -72,7 +97,7 @@ function OrderCard({ id, order }) {
           <p className="t-body-sm" style={{ margin: 0, color: 'var(--body)' }}>{order.note}</p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24, marginBottom: 28 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 24, marginBottom: 28 }}>
           <div>
             <div className="t-caption" style={{ color: 'var(--muted)', marginBottom: 8 }}>Entrega estimada</div>
             <div className="t-body" style={{ display: 'flex', gap: 8, alignItems: 'center' }}><Icon name="truck" size={16} stroke="var(--sage)" /> {order.eta}</div>
@@ -106,6 +131,7 @@ function OrderCard({ id, order }) {
 }
 
 function Pedidos() {
+  const { isMobile } = useViewport();
   const [num, setNum] = React.useState('');
   const [found, setFound] = React.useState(null);
   const [error, setError] = React.useState('');
@@ -119,7 +145,7 @@ function Pedidos() {
     <Shell active="pedidos">
       {() =>
       <main>
-          <section style={{ padding: '56px 48px 32px' }}>
+          <section style={{ padding: isMobile ? '40px 20px 24px' : '56px 48px 32px' }}>
             <div style={{ maxWidth: 720, margin: '0 auto', textAlign: 'center' }}>
               <SectionLabel style={{ display: 'inline-block' }}>Seguimiento</SectionLabel>
               <h1 className="t-heading-lg" style={{ margin: 0 }}>Sigue tu pedido</h1>
@@ -129,7 +155,7 @@ function Pedidos() {
             </div>
           </section>
 
-          <section style={{ padding: '0 48px 40px' }}>
+          <section style={{ padding: isMobile ? '0 20px 40px' : '0 48px 40px' }}>
             <div style={{ maxWidth: 720, margin: '0 auto' }}>
               <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'stretch',
               background: 'var(--surface-hueso)', border: '1px solid var(--hairline)',
@@ -159,7 +185,7 @@ function Pedidos() {
           </section>
 
           {found &&
-        <section style={{ padding: '8px 48px 64px' }}>
+        <section style={{ padding: isMobile ? '8px 20px 56px' : '8px 48px 64px' }}>
               <div style={{ maxWidth: 720, margin: '0 auto' }}>
                 <OrderCard id={found} order={ORDERS[found]} />
               </div>
@@ -167,11 +193,11 @@ function Pedidos() {
         }
 
           {/* Cómo funciona */}
-          <section style={{ background: 'var(--surface-barro)', padding: '80px 48px' }}>
+          <section style={{ background: 'var(--surface-barro)', padding: isMobile ? '56px 20px' : '80px 48px' }}>
             <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto' }}>
               <SectionLabel color="var(--sage)">Cómo funciona</SectionLabel>
               <h2 className="t-heading-lg" style={{ margin: '0 0 40px' }}>Del torno a tu puerta</h2>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, alignItems: 'stretch' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(4, 1fr)', gap: 16, alignItems: 'stretch' }}>
                 {[
               ['package', 'Confirmamos', 'Recibimos tu pedido y te lo confirmamos por correo.', false],
               ['flame', 'Horneamos', 'Torneado, esmaltado y cocción a alta temperatura. De 2 a 4 semanas.', true],

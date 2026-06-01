@@ -3,10 +3,11 @@ const FEATURED_B = ['jarra-agua', 'taza-barro-mate', 'cuenco-hondo'].map(getProd
 const PREVIEW_B = ['florero-cilindrico', 'plato-hondo-hueso', 'set-dos-tazas'].map(getProduct);
 
 function HeroB() {
+  const { isMobile } = useViewport();
   return (
-    <header style={{ padding: '56px 48px 88px' }}>
+    <header style={{ padding: isMobile ? '32px 20px 56px' : '56px 48px 88px' }}>
       <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1.1fr .9fr', gap: 56, alignItems: 'end' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1.1fr .9fr', gap: isMobile ? 32 : 56, alignItems: 'end' }}>
           <div>
             <SectionLabel>Cerámica de alta temperatura · Monterrey</SectionLabel>
             <h1 className="t-hero" style={{ margin: 0 }}>Barro,<br />fuego<br />y diseño.</h1>
@@ -14,7 +15,7 @@ function HeroB() {
               Tazas, platos y vasijas de gres y porcelana, hechas a mano en Monterrey
               y cocidas a más de 1200°C. Cada objeto, una pieza única.
             </p>
-            <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
+            <div style={{ display: 'flex', gap: 14, alignItems: 'center', flexWrap: 'wrap' }}>
               <Button href="catalogo.html">Ver piezas <Icon name="arrowRight" size={17} /></Button>
               <Button href="about.html" variant="secondary">Conocer el estudio</Button>
             </div>

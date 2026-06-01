@@ -23,6 +23,7 @@ function Accordion({ rows }) {
 }
 
 function Producto() {
+  const { isMobile } = useViewport();
   const id = new URLSearchParams(location.search).get('id') || CATALOG[0].id;
   const p = getProduct(id) || CATALOG[0];
   const related = relatedTo(p.id, 3);
@@ -32,9 +33,9 @@ function Producto() {
     <Shell active="tienda">
       {(cart) => (
         <main>
-          <section style={{ padding: '32px 48px 0' }}>
-            <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto' }}>
-              <div className="t-body-sm" style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+          <section style={{ padding: isMobile ? '20px 20px 0' : '32px 48px 0' }}>
+            <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto', padding: 0 }}>
+              <div className="t-body-sm" style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
                 <a href="index.html" style={{ textDecoration: 'none', color: 'var(--muted)' }}>Inicio</a>
                 <Icon name="chevronRight" size={13} stroke="var(--muted-soft)" />
                 <a href="catalogo.html" style={{ textDecoration: 'none', color: 'var(--muted)' }}>Catálogo</a>
@@ -44,11 +45,11 @@ function Producto() {
             </div>
           </section>
 
-          <section style={{ padding: '32px 48px 88px' }}>
+          <section style={{ padding: isMobile ? '20px 20px 64px' : '32px 48px 88px' }}>
             <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto',
-              display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'start' }}>
+              display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? 28 : 64, alignItems: 'start' }}>
               {/* Imagen(es) */}
-              <div style={{ position: 'sticky', top: 92, display: 'flex', flexDirection: 'column', gap: 14 }}>
+              <div style={{ position: isMobile ? 'static' : 'sticky', top: 92, display: 'flex', flexDirection: 'column', gap: 14 }}>
                 <div style={{ borderRadius: 'var(--radius-lg)', overflow: 'hidden', boxShadow: 'var(--shadow-card)' }}>
                   <ImageSlot ratio="4 / 5" radius="var(--radius-lg)" label={p.name + ' · 4:5'} />
                 </div>

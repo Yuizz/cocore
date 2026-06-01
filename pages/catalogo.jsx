@@ -27,10 +27,12 @@ function FilterGroup({ title, options, selected, onToggle }) {
 }
 
 function Catalogo() {
+  const { isMobile, isTablet } = useViewport();
   const [cats, setCats] = React.useState([]);
   const [mats, setMats] = React.useState([]);
   const [cols, setCols] = React.useState([]);
   const [sort, setSort] = React.useState('Destacados');
+  const [showFilters, setShowFilters] = React.useState(false);
   const toggle = (setter) => (v) => setter(prev => prev.includes(v) ? prev.filter(x => x !== v) : [...prev, v]);
 
   let shown = CATALOG.filter(p =>
@@ -48,7 +50,7 @@ function Catalogo() {
       {(cart) => (
         <main>
           {/* Encabezado */}
-          <section style={{ padding: '48px 48px 32px' }}>
+          <section style={{ padding: isMobile ? '32px 20px 24px' : '48px 48px 32px' }}>
             <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto' }}>
               <SectionLabel>Catálogo</SectionLabel>
               <h1 className="t-heading-lg" style={{ margin: 0 }}>Todas las piezas</h1>
@@ -58,20 +60,37 @@ function Catalogo() {
             </div>
           </section>
 
-          <section style={{ padding: '0 48px 96px' }}>
+          <section style={{ padding: isMobile ? '0 20px 64px' : '0 48px 96px' }}>
             <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto',
-              display: 'grid', gridTemplateColumns: '240px 1fr', gap: 48, alignItems: 'start' }}>
+              display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '240px 1fr', gap: isMobile ? 0 : 48, alignItems: 'start' }}>
               {/* Rail de filtros */}
-              <aside style={{ position: 'sticky', top: 92 }}>
+              {isMobile && (
+                <button onClick={() => setShowFilters(s => !s)} style={{ display: 'flex', alignItems: 'center',
+                  justifyContent: 'space-between', width: '100%', background: 'var(--surface-hueso)',
+                  border: '1px solid var(--hairline)', borderRadius: 'var(--radius-pill)', padding: '13px 20px',
+                  cursor: 'pointer', marginBottom: showFilters ? 16 : 24, fontFamily: 'var(--font-body)', fontSize: 15, color: 'var(--ink)' }}>
+                  <span style={{ display: 'flex', alignItems: 'center', gap: 8 }}><Icon name="sliders" size={17} /> Filtros{active > 0 ? ` (${active})` : ''}</span>
+                  <Icon name="chevronDown" size={18} style={{ transform: showFilters ? 'rotate(180deg)' : 'none', transition: 'transform .2s' }} />
+                </button>
+              )}
+              <aside style={{ position: isMobile ? 'static' : 'sticky', top: 92,
+                display: isMobile && !showFilters ? 'none' : 'block',
+                marginBottom: isMobile ? 24 : 0,
+                background: isMobile ? 'var(--surface-hueso)' : 'transparent',
+                borderRadius: isMobile ? 'var(--radius-md)' : 0, padding: isMobile ? '8px 18px 18px' : 0 }}>
+                {!isMobile && (
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 22 }}>
                   <span className="t-title-md" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                     <Icon name="sliders" size={17} /> Filtros</span>
                   {active > 0 && <button onClick={clearAll} className="t-body-sm"
                     style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--terracota)', padding: 0 }}>Limpiar</button>}
                 </div>
+                )}
                 <FilterGroup title="Categoría" options={CATEGORIES} selected={cats} onToggle={toggle(setCats)} />
                 <FilterGroup title="Material" options={['Gres', 'Porcelana', 'Esmalte mate']} selected={mats} onToggle={toggle(setMats)} />
                 <FilterGroup title="Colección" options={COLLECTIONS.map(c => c.key)} selected={cols} onToggle={toggle(setCols)} />
+                {isMobile && active > 0 && <button onClick={clearAll} className="t-body-sm"
+                  style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--terracota)', padding: '4px 0' }}>Limpiar filtros</button>}
               </aside>
 
               {/* Grid */}
@@ -97,7 +116,7 @@ function Catalogo() {
                     <div style={{ marginTop: 16 }}><Button variant="outline" size="sm" onClick={clearAll}>Limpiar filtros</Button></div>
                   </div>
                 ) : (
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, minmax(0, 1fr))' : isTablet ? 'repeat(2, minmax(0, 1fr))' : 'repeat(3, minmax(0, 1fr))', gap: isMobile ? 12 : 24 }}>
                     {shown.map((p, i) => <ProductCard key={p.id} piece={p} onAdd={cart.add} tone={i % 2 ? 'b' : 'a'} />)}
                   </div>
                 )}

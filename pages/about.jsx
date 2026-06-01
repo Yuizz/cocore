@@ -1,20 +1,21 @@
 // about.jsx — El estudio. Historia, proceso, fundadoras y ubicación (Monterrey).
 function About() {
+  const { isMobile } = useViewport();
   return (
     <Shell active="estudio">
       {() =>
       <main>
           {/* Hero editorial */}
-          <header style={{ padding: '64px 48px 80px' }}>
+          <header style={{ padding: isMobile ? '40px 20px 48px' : '64px 48px 80px' }}>
             <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto' }}>
               <SectionLabel>El estudio</SectionLabel>
               <h1 className="t-hero" style={{ margin: 0, maxWidth: 900 }}>Dos diseñadoras, un horno, y la voluntad de que lo cotidiano tenga forma.</h1>
             </div>
           </header>
 
-          <section style={{ padding: '0 48px 88px' }}>
+          <section style={{ padding: isMobile ? '0 20px 56px' : '0 48px 88px' }}>
             <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto',
-            display: 'grid', gridTemplateColumns: '7fr 5fr', gap: 64, alignItems: 'start' }}>
+            display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '7fr 5fr', gap: isMobile ? 32 : 64, alignItems: 'start' }}>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 22 }}>
                 <p className="t-body-lg" style={{ margin: 0 }}>
                   Cocore nació en Monterrey de una idea simple: que los objetos con los que convivimos
@@ -39,11 +40,11 @@ function About() {
           </section>
 
           {/* Proceso */}
-          <section id="proceso" style={{ background: 'var(--surface-barro)', padding: '96px 48px', scrollMarginTop: 92 }}>
+          <section id="proceso" style={{ background: 'var(--surface-barro)', padding: isMobile ? '56px 20px' : '96px 48px', scrollMarginTop: 92 }}>
             <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto' }}>
               <SectionLabel color="var(--sage)">El proceso</SectionLabel>
               <h2 className="t-heading-lg" style={{ margin: '0 0 48px', maxWidth: 560 }}>De un bloque de barro a una pieza para toda la vida.</h2>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 32 }}>
+              <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: 32 }}>
                 {[
               ['01', 'Torno', 'Cada pieza nace en el torno, moldeada a mano. Es el momento donde se define su carácter — ninguna sale idéntica.', 'Torno'],
               ['02', 'Esmalte', 'Mezclamos nuestros propios esmaltes mate en tonos tierra, hueso y humo. El color final solo se revela tras el fuego.', 'Esmalte'],
@@ -63,9 +64,9 @@ function About() {
           </section>
 
           {/* Cifras / manifiesto */}
-          <section style={{ padding: '88px 48px' }}>
+          <section style={{ padding: isMobile ? '56px 20px' : '88px 48px' }}>
             <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto',
-            display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 48 }}>
+            display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: isMobile ? 28 : 48 }}>
               {[
             ['+1200°C', 'Temperatura de cocción. Lo que hace al gres y la porcelana resistentes.'],
             ['100%', 'Hecho a mano en Monterrey. Sin moldes industriales, sin maquila.'],
@@ -82,9 +83,9 @@ function About() {
           </section>
 
           {/* Ubicación */}
-          <section style={{ background: 'var(--surface-dark)', padding: '88px 48px' }}>
+          <section style={{ background: 'var(--surface-dark)', padding: isMobile ? '56px 20px' : '88px 48px' }}>
             <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto',
-            display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
+            display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? 32 : 64, alignItems: 'center' }}>
               <div>
                 <SectionLabel color="var(--sage)">Dónde estamos</SectionLabel>
                 <h2 className="t-heading-lg" style={{ margin: 0, color: 'var(--on-dark)' }}>Base de operaciones en Monterrey.</h2>

@@ -38,12 +38,13 @@ const GROUPS = [
 ];
 
 function Faq() {
+  const { isMobile } = useViewport();
   const [active, setActive] = React.useState(0);
   return (
     <Shell active="ayuda">
       {() => (
         <main>
-          <section style={{ padding: '56px 48px 40px' }}>
+          <section style={{ padding: isMobile ? '40px 20px 24px' : '56px 48px 40px' }}>
             <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto' }}>
               <SectionLabel>Ayuda</SectionLabel>
               <h1 className="t-heading-lg" style={{ margin: 0 }}>Preguntas frecuentes</h1>
@@ -53,10 +54,10 @@ function Faq() {
             </div>
           </section>
 
-          <section style={{ padding: '0 48px 88px' }}>
+          <section style={{ padding: isMobile ? '0 20px 64px' : '0 48px 88px' }}>
             <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto',
-              display: 'grid', gridTemplateColumns: '240px 1fr', gap: 56, alignItems: 'start' }}>
-              <aside style={{ position: 'sticky', top: 92, display: 'flex', flexDirection: 'column', gap: 4 }}>
+              display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '240px 1fr', gap: isMobile ? 28 : 56, alignItems: 'start' }}>
+              <aside style={{ position: isMobile ? 'static' : 'sticky', top: 92, display: 'flex', flexDirection: isMobile ? 'row' : 'column', gap: isMobile ? 8 : 4, flexWrap: 'wrap' }}>
                 {GROUPS.map(([title], i) => (
                   <button key={title} onClick={() => { setActive(i); document.getElementById('g' + i)?.scrollIntoView({ block: 'start' }); }}
                     style={{ textAlign: 'left', background: 'none', border: 'none', cursor: 'pointer',
@@ -64,7 +65,7 @@ function Faq() {
                       color: active === i ? 'var(--terracota)' : 'var(--body)',
                       background: active === i ? 'var(--terracota-soft)' : 'transparent', transition: 'all .15s' }}>{title}</button>
                 ))}
-                <div style={{ marginTop: 24, padding: '18px', background: 'var(--surface-hueso)', borderRadius: 'var(--radius-md)' }}>
+                <div style={{ marginTop: isMobile ? 0 : 24, padding: '18px', background: 'var(--surface-hueso)', borderRadius: 'var(--radius-md)', display: isMobile ? 'none' : 'block' }}>
                   <div className="t-title-md" style={{ marginBottom: 6 }}>¿No encuentras tu respuesta?</div>
                   <p className="t-body-sm" style={{ margin: '0 0 14px' }}>Escríbenos y te ayudamos.</p>
                   <Button href="contacto.html" variant="outline" size="sm">Contacto</Button>

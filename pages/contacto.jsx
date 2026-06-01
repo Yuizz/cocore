@@ -10,9 +10,16 @@ function Field({ label, children }) {
 const inputStyle = {
   border: '1px solid var(--hairline)', borderRadius: 'var(--radius-sm)', padding: '13px 16px',
   fontSize: 15, fontFamily: 'var(--font-body)', background: 'var(--canvas)', color: 'var(--ink)', outline: 'none', width: '100%',
+  boxSizing: 'border-box', lineHeight: 1.4, margin: 0,
+};
+const selectStyle = {
+  ...inputStyle, cursor: 'pointer', appearance: 'none', WebkitAppearance: 'none', MozAppearance: 'none',
+  backgroundImage: "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b5d4f' stroke-width='1.8'><path d='m6 9 6 6 6-6'/></svg>\")",
+  backgroundRepeat: 'no-repeat', backgroundPosition: 'right 14px center', paddingRight: 42,
 };
 
 function Contacto() {
+  const { isMobile } = useViewport();
   const [sent, setSent] = React.useState(false);
   const [form, setForm] = React.useState({ nombre: '', correo: '', asunto: 'Un pedido', mensaje: '' });
   const set = (k) => (e) => setForm(f => ({ ...f, [k]: e.target.value }));
@@ -22,9 +29,9 @@ function Contacto() {
     <Shell active="estudio">
       {() => (
         <main>
-          <section style={{ padding: '56px 48px 88px' }}>
+          <section style={{ padding: isMobile ? '40px 20px 64px' : '56px 48px 88px' }}>
             <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto',
-              display: 'grid', gridTemplateColumns: '1.1fr .9fr', gap: 72, alignItems: 'start' }}>
+              display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1.1fr .9fr', gap: isMobile ? 44 : 72, alignItems: 'start' }}>
               {/* Form */}
               <div>
                 <SectionLabel>Contacto</SectionLabel>
@@ -46,12 +53,12 @@ function Contacto() {
                   </div>
                 ) : (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 20, maxWidth: 520 }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: 20 }}>
                       <Field label="Nombre"><input value={form.nombre} onChange={set('nombre')} placeholder="Tu nombre" style={inputStyle} /></Field>
                       <Field label="Correo"><input value={form.correo} onChange={set('correo')} placeholder="tu@correo.com" style={inputStyle} /></Field>
                     </div>
                     <Field label="¿Sobre qué?">
-                      <select value={form.asunto} onChange={set('asunto')} style={{ ...inputStyle, cursor: 'pointer' }}>
+                      <select value={form.asunto} onChange={set('asunto')} style={selectStyle}>
                         <option>Un pedido</option>
                         <option>Encargo personalizado</option>
                         <option>Mayoreo / hospitalidad</option>

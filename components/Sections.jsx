@@ -18,6 +18,7 @@ function TrustStrip() {
 
 // Tira de propuestas de valor — íconos de línea + texto corto.
 function ValueProps({ surface = 'canvas' }) {
+  const { isMobile } = useViewport();
   const items = [
   ['flame', 'Alta temperatura', 'Gres y porcelana cocidos a más de 1200°C. Resistentes para el uso diario.'],
   ['sparkle', 'Pieza única', 'Hechas a mano, una por una. No hay dos exactamente iguales.'],
@@ -25,9 +26,9 @@ function ValueProps({ surface = 'canvas' }) {
 
   const bg = surface === 'hueso' ? 'var(--surface-hueso)' : 'var(--canvas)';
   return (
-    <section style={{ background: bg, padding: '56px 48px', borderTop: '1px solid var(--hairline-soft)', borderBottom: '1px solid var(--hairline-soft)' }}>
+    <section style={{ background: bg, padding: isMobile ? '36px 24px' : '56px 48px', borderTop: '1px solid var(--hairline-soft)', borderBottom: '1px solid var(--hairline-soft)' }}>
       <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto',
-        display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 40 }}>
+        display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(3, 1fr)', gap: isMobile ? 24 : 40 }}>
         {items.map(([ic, t, d]) =>
         <div key={t} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
             <div style={{ flex: 'none', width: 44, height: 44, borderRadius: '50%',
@@ -48,12 +49,13 @@ function ValueProps({ surface = 'canvas' }) {
 
 // Banda de colección destacada — header + grid 3-col. cta opcional → catálogo.
 function FeaturedBand({ id, surface = 'canvas', label, title, lead, pieces, onAdd, cta, tone = 'a' }) {
+  const { isMobile, isTablet } = useViewport();
   const bg = surface === 'hueso' ? 'var(--surface-hueso)' : surface === 'barro' ? 'var(--surface-barro)' : 'var(--canvas)';
   return (
-    <section id={id} style={{ background: bg, padding: '96px 48px' }}>
+    <section id={id} style={{ background: bg, padding: isMobile ? '64px 20px' : '96px 48px' }}>
       <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto' }}>
         <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between',
-          gap: 32, flexWrap: 'wrap', marginBottom: 40 }}>
+          gap: 32, flexWrap: 'wrap', marginBottom: isMobile ? 28 : 40 }}>
           <div style={{ maxWidth: 560 }}>
             <SectionLabel>{label}</SectionLabel>
             <h2 className="t-heading-lg" style={{ margin: 0 }}>{title}</h2>
@@ -61,7 +63,7 @@ function FeaturedBand({ id, surface = 'canvas', label, title, lead, pieces, onAd
           </div>
           {cta && <Button href="catalogo.html" variant="secondary">{cta} <Icon name="arrowRight" size={16} /></Button>}
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)', gap: isMobile ? 16 : 24 }}>
           {pieces.map((p, i) => <ProductCard key={p.id} piece={p} onAdd={onAdd}
           surface={surface === 'hueso' ? 'canvas' : 'hueso'} tone={i % 2 ? 'b' : 'a'} />)}
         </div>
@@ -79,10 +81,11 @@ function StudioBand({ surface = 'barro' }) {
 
   const bg = surface === 'dark' ? 'var(--surface-dark)' : 'var(--surface-barro)';
   const dark = surface === 'dark';
+  const { isMobile } = useViewport();
   return (
-    <section style={{ background: bg, padding: '96px 48px' }}>
+    <section style={{ background: bg, padding: isMobile ? '64px 24px' : '96px 48px' }}>
       <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto',
-        display: 'grid', gridTemplateColumns: '5fr 7fr', gap: 64, alignItems: 'center' }}>
+        display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '5fr 7fr', gap: isMobile ? 36 : 64, alignItems: 'center' }}>
         <div style={{ borderRadius: 'var(--radius-lg)', overflow: 'hidden' }}>
           <ImageSlot ratio="3 / 4" radius="var(--radius-lg)" label="El estudio · manos trabajando" />
         </div>
@@ -116,11 +119,13 @@ function StudioBand({ surface = 'barro' }) {
 function CalloutBand() {
   const [email, setEmail] = React.useState('');
   const [done, setDone] = React.useState(false);
+  const { isMobile } = useViewport();
   return (
-    <section style={{ background: 'var(--terracota)', padding: '80px 48px' }}>
+    <section style={{ background: 'var(--terracota)', padding: isMobile ? '56px 24px' : '80px 48px' }}>
       <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto',
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        gap: 48, flexWrap: 'wrap' }}>
+        display: 'flex', alignItems: isMobile ? 'stretch' : 'center', justifyContent: 'space-between',
+        flexDirection: isMobile ? 'column' : 'row',
+        gap: isMobile ? 28 : 48, flexWrap: 'wrap' }}>
         <div style={{ maxWidth: 560 }}>
           <h2 className="t-section" style={{ margin: 0, color: '#fff' }}>¿Buscas algo específico?</h2>
           <p className="t-body-lg" style={{ margin: '16px 0 0', color: 'rgba(255,255,255,.85)' }}>
@@ -129,7 +134,7 @@ function CalloutBand() {
         </div>
         <div style={{ display: 'flex', alignItems: 'stretch',
           background: 'rgba(255,255,255,.14)', border: '1px solid rgba(255,255,255,.35)',
-          borderRadius: 'var(--radius-pill)', overflow: 'hidden', minWidth: 340 }}>
+          borderRadius: 'var(--radius-pill)', overflow: 'hidden', minWidth: isMobile ? 0 : 340, width: isMobile ? '100%' : 'auto' }}>
           {done ?
           <div style={{ padding: '14px 28px', color: '#fff', display: 'flex',
             alignItems: 'center', gap: 8, fontFamily: 'var(--font-body)', fontSize: 15 }}>
@@ -154,11 +159,12 @@ function CalloutBand() {
 
 // Spotlight de una colección — banda oscura destacada (reservada para secciones destacadas).
 function SpotlightHumo() {
+  const { isMobile } = useViewport();
   return (
     <section style={{ background: 'var(--surface-dark-elev)' }}>
       <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto',
-        display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'stretch' }}>
-        <div style={{ padding: '96px 56px', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', alignItems: 'stretch' }}>
+        <div style={{ padding: isMobile ? '56px 24px' : '96px 56px', display: 'flex', flexDirection: 'column', justifyContent: 'center', order: isMobile ? 2 : 1 }}>
           <SectionLabel color="var(--terracota-soft)">Colección destacada · Humo</SectionLabel>
           <h2 className="t-section" style={{ margin: 0, color: 'var(--on-dark)' }}>El esmalte que se rompe sobre las aristas.</h2>
           <p className="t-body-lg" style={{ margin: '20px 0 32px', color: 'var(--on-dark-soft)', maxWidth: 420 }}>
@@ -166,7 +172,7 @@ function SpotlightHumo() {
           </p>
           <div><Button href="catalogo.html">Explorar la colección <Icon name="arrowRight" size={16} /></Button></div>
         </div>
-        <div style={{ minHeight: 460, display: 'flex', alignItems: 'center', justifyContent: 'center',
+        <div style={{ minHeight: isMobile ? 280 : 460, order: isMobile ? 1 : 2, display: 'flex', alignItems: 'center', justifyContent: 'center',
           background: 'repeating-linear-gradient(45deg,#e0d4c2,#e0d4c2 11px,#e8ddcd 11px,#e8ddcd 22px)' }}>
           <span style={{ fontFamily: 'var(--font-body)', fontSize: 11, letterSpacing: '1.4px',
             textTransform: 'uppercase', color: 'var(--muted-soft)' }}>Colección Humo · banda</span>

@@ -172,3 +172,15 @@ function useCart() {
 }
 
 Object.assign(window, { CATALOG, COLLECTIONS, CATEGORIES, getProduct, relatedTo, useCart });
+
+// ---------- VIEWPORT ----------
+function useViewport() {
+  const [w, setW] = React.useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
+  React.useEffect(() => {
+    const on = () => setW(window.innerWidth);
+    window.addEventListener('resize', on);
+    return () => window.removeEventListener('resize', on);
+  }, []);
+  return { w, isMobile: w <= 760, isTablet: w <= 1024 };
+}
+window.useViewport = useViewport;

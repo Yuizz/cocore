@@ -1,9 +1,10 @@
 // home-c.jsx — Home C · Catálogo-first / Minimal. Tipográfico, shop-forward, mucho aire.
 function HeroC() {
+  const { isMobile } = useViewport();
   return (
-    <header style={{ padding: '40px 48px 24px' }}>
+    <header style={{ padding: isMobile ? '24px 20px 16px' : '40px 48px 24px' }}>
       <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto' }}>
-        <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: 32 }}>
+        <div style={{ display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between', flexWrap: 'wrap', gap: isMobile ? 16 : 32 }}>
           <div style={{ maxWidth: 760 }}>
             <SectionLabel>Estudio cerámico · Monterrey</SectionLabel>
             <h1 className="t-hero" style={{ margin: 0 }}>Objetos cotidianos,<br />cocidos a alta temperatura.</h1>
@@ -18,14 +19,15 @@ function HeroC() {
 }
 
 function CategoryGrid({ onAdd }) {
+  const { isMobile, isTablet } = useViewport();
   const tabs = ['Todo', ...CATEGORIES];
   const [tab, setTab] = React.useState('Todo');
   const shown = tab === 'Todo' ? CATALOG : CATALOG.filter(p => p.category === tab);
   return (
-    <section style={{ padding: '24px 48px 64px' }}>
+    <section style={{ padding: isMobile ? '20px 20px 56px' : '24px 48px 64px' }}>
       <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto' }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          borderBottom: '1px solid var(--hairline)', paddingBottom: 18, marginBottom: 36, flexWrap: 'wrap', gap: 16 }}>
+          borderBottom: '1px solid var(--hairline)', paddingBottom: 18, marginBottom: isMobile ? 28 : 36, flexWrap: 'wrap', gap: 16 }}>
           <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
             {tabs.map(t => (
               <button key={t} onClick={() => setTab(t)}
@@ -37,7 +39,7 @@ function CategoryGrid({ onAdd }) {
           </div>
           <Button href="catalogo.html" variant="secondary">Ir al catálogo completo <Icon name="arrowRight" size={15} /></Button>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : isTablet ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)', gap: isMobile ? 16 : 24 }}>
           {shown.map((p, i) => <ProductCard key={p.id} piece={p} onAdd={onAdd} surface="canvas" tone={i % 2 ? 'b' : 'a'} />)}
         </div>
       </div>
@@ -47,10 +49,11 @@ function CategoryGrid({ onAdd }) {
 
 // Tira mínima del estudio — una línea + enlace.
 function StudioStripC() {
+  const { isMobile } = useViewport();
   return (
-    <section style={{ borderTop: '1px solid var(--hairline)', borderBottom: '1px solid var(--hairline)', padding: '64px 48px' }}>
+    <section style={{ borderTop: '1px solid var(--hairline)', borderBottom: '1px solid var(--hairline)', padding: isMobile ? '48px 20px' : '64px 48px' }}>
       <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto',
-        display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 40, flexWrap: 'wrap' }}>
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: isMobile ? 24 : 40, flexWrap: 'wrap' }}>
         <h2 className="t-heading-lg" style={{ margin: 0, maxWidth: 680 }}>
           Dos diseñadoras, un horno, y la voluntad de que lo cotidiano tenga forma.
         </h2>

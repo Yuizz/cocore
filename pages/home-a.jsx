@@ -3,10 +3,11 @@ const FEATURED_A = ['taza-barro-mate', 'plato-hondo-hueso', 'vasija-pequena'].ma
 const PREVIEW_A = ['tazon-desayuno', 'jarra-agua', 'florero-cilindrico'].map(getProduct);
 
 function HeroA() {
+  const { isMobile } = useViewport();
   return (
-    <header style={{ position: 'relative', padding: '64px 48px 88px', overflow: 'hidden' }}>
+    <header style={{ position: 'relative', padding: isMobile ? '32px 20px 56px' : '64px 48px 88px', overflow: 'hidden' }}>
       <div style={{ maxWidth: 'var(--container-max)', margin: '0 auto',
-        display: 'grid', gridTemplateColumns: '1.05fr .95fr', gap: 56, alignItems: 'center' }}>
+        display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1.05fr .95fr', gap: isMobile ? 36 : 56, alignItems: 'center' }}>
         <div>
           <SectionLabel>Cerámica de alta temperatura · Monterrey</SectionLabel>
           <h1 className="t-hero" style={{ margin: 0 }}>Piezas hechas a mano, con voluntad de diseño.</h1>
@@ -14,12 +15,12 @@ function HeroA() {
             Tazas, platos y vasijas de gres y porcelana, cocidas a alta temperatura
             en Monterrey. Cada objeto, una pieza única.
           </p>
-          <div style={{ display: 'flex', gap: 14, alignItems: 'center' }}>
+          <div style={{ display: 'flex', gap: 14, alignItems: 'center', flexWrap: 'wrap' }}>
             <Button href="catalogo.html">Ver piezas <Icon name="arrowRight" size={17} /></Button>
             <Button href="about.html" variant="secondary">Conocer el estudio</Button>
           </div>
         </div>
-        <div style={{ position: 'relative' }}>
+        <div style={{ position: 'relative', order: isMobile ? -1 : 0 }}>
           <div style={{ borderRadius: 'var(--radius-xl)', overflow: 'hidden',
             boxShadow: '0 2px 12px rgba(26,21,16,0.07)' }}>
             <ImageSlot ratio="3 / 4" radius="var(--radius-xl)" label="Composición de piezas · 3:4" />

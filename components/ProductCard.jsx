@@ -18,7 +18,7 @@ function ProductCard({ piece, onAdd, surface = 'hueso', tone = 'a' }) {
       <div style={{ paddingTop: 16, display: 'flex', flexDirection: 'column', gap: 7 }}>
         <div className="t-caption" style={{ color: 'var(--sage)' }}>{piece.material}</div>
         <a href={href} className="t-title-lg" style={{ textDecoration: 'none', color: 'var(--ink)' }}>{piece.name}</a>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 8 }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 8, marginTop: 8, flexWrap: 'wrap' }}>
           <div className="t-heading-md">{money(piece.price)}</div>
           <Button variant="outline" size="sm" onClick={() => onAdd && onAdd(piece)}>Agregar</Button>
         </div>

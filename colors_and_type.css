@@ -130,3 +130,20 @@
   font-family: var(--font-body); font-weight: 400;
   font-size: 12px; line-height: 1.4; color: var(--muted-soft);
 }
+
+/* ============================================================
+   RESPONSIVE — type scales down on tablet / phone.
+   Layout (grids, padding) is handled per-component via useViewport.
+   ============================================================ */
+@media (max-width: 1024px) {
+  .t-hero    { font-size: 60px; letter-spacing: -1.2px; }
+  .t-section { font-size: 44px; letter-spacing: -0.8px; }
+}
+@media (max-width: 760px) {
+  .t-hero       { font-size: 40px; line-height: 1.08; letter-spacing: -0.8px; }
+  .t-section    { font-size: 32px; line-height: 1.12; letter-spacing: -0.6px; }
+  .t-heading-lg { font-size: 28px; letter-spacing: -0.4px; }
+  .t-heading-md { font-size: 24px; }
+  .t-title-lg   { font-size: 18px; }
+  .t-body-lg    { font-size: 16px; }
+}
